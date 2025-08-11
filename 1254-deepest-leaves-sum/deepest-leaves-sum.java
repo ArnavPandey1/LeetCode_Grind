@@ -15,11 +15,10 @@
  */
 class Solution {
     public int deepestLeavesSum(TreeNode root) {
-        // int s=0;
-        // if(root==null){
-        //     return s;
-        // }
         int s=0;
+        if(root==null){
+            return s;
+        }
         Queue<TreeNode>q=new LinkedList<>();
         q.add(root);
         while(!q.isEmpty()){
