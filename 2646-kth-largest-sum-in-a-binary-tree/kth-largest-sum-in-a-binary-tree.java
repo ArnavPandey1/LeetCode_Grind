@@ -36,11 +36,11 @@ class Solution {
         Collections.sort(l1);
         if(l1.size()<k)
         return -1;
-        long ans=-1;
-        for(int i=l1.size()-1;i>=0&&k>0;i--){
-            ans=l1.get(i);
-            k--;
-        }
-        return ans;
+        // long ans=-1;
+        // for(int i=l1.size()-1;i>=0&&k>0;i--){
+        //     ans=l1.get(i);
+        //     k--;
+        // } 
+        return l1.get(l1.size()-k);
     }
 }
