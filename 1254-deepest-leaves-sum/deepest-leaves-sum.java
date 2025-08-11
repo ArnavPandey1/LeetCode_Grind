@@ -22,8 +22,7 @@ class Solution {
         Queue<TreeNode>q=new LinkedList<>();
         q.add(root);
         while(!q.isEmpty()){
-            int n=q.size();
-            s=0;
+            int n=q.size();s=0;
             while(n>0){
                TreeNode t=q.remove();
                s=s+t.val;
