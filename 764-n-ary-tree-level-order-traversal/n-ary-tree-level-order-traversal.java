@@ -39,7 +39,7 @@ class Solution {
                 }
                 n--;
             }
-            l1.add(new ArrayList<>(l2));
+            l1.add(l2);
         }
         return l1;
     }
