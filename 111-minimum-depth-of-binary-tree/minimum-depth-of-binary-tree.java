@@ -14,7 +14,7 @@
  * }
  */
 class Solution {
-    static int min=Integer.MAX_VALUE;
+    static int min;
     public int minDepth(TreeNode root) {
         if(root==null)
         return 0;
