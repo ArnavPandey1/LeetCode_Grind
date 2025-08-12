@@ -28,6 +28,7 @@ class Solution {
         }
         if(r.left==null && r.right==null){
             min=Math.min(min,c);
+            return;
         }
         traverse(r.left,c+1);
         traverse(r.right,c+1);
