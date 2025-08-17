@@ -15,11 +15,7 @@
  */
 class Solution {
     public TreeNode constructMaximumBinaryTree(int[] nums) {
-        TreeNode t=null;
-        if(nums.length==0)
-        return t;
-        t=traverse(nums,0,nums.length-1);
-        return t;
+        return traverse(nums,0,nums.length-1);
     }
     public TreeNode traverse(int []nums,int low,int high){
         if(low>high)
