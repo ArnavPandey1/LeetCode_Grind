@@ -17,7 +17,7 @@ class Solution {
     public List<Integer> getAllElements(TreeNode root1, TreeNode root2) {
         List<Integer> l1 = new ArrayList<>();
         List<Integer> l2 = new ArrayList<>();
-        List<Integer> l3 = new ArrayList<>();
+        List<Integer> l3 = new ArrayList<>(l1.size()+l2.size());
         traverse(root1, l1);
         traverse(root2, l2);
         int ll1 = 0;
