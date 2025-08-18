@@ -14,7 +14,6 @@ Here’s a small sample of problem stats:
 | 20 | Valid Parentheses | 1 | 42.5 |
 | 103 | Binary Tree Zigzag Level Order Traversal | 1 | 42.4 |
 | 105 | Construct Binary Tree from Preorder and Inorder Traversal | 1 | 44.8 |
-| 2646 | Kth Largest Sum in a Binary Tree | 47 | 66.9 |
 | ... | ... | ... | ... |
 
 All solutions are implemented in Java and synced using [LeetSync](https://github.com/LeetSync). While this is primarily my personal grind log, if you notice bugs, know a more optimal solution, or have suggestions for improvement, you’re welcome to open an issue or submit a pull request.  
