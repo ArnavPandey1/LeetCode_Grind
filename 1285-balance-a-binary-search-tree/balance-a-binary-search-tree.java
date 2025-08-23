@@ -16,7 +16,7 @@
 class Solution {
     public TreeNode balanceBST(TreeNode root) {
         List<Integer> l1 = new ArrayList<>();
-        preorderTraverse(root, l1);
+        inorderTraverse(root, l1);
         return construct(l1);
     }
 
@@ -34,11 +34,11 @@ class Solution {
         return temp;
     }
 
-    public void preorderTraverse(TreeNode root, List<Integer> l1) {
+    public void inorderTraverse(TreeNode root, List<Integer> l1) {
         if (root == null)
             return;
-        preorderTraverse(root.left, l1);
+        inorderTraverse(root.left, l1);
         l1.add(root.val);
-        preorderTraverse(root.right, l1);
+        inorderTraverse(root.right, l1);
     }
 }
