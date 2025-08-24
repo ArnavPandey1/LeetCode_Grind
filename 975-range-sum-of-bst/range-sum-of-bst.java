@@ -21,7 +21,7 @@ class Solution {
     }
     public void traverse(TreeNode root,int low,int high){
         if(root==null)
-        return ;
+        return;
         traverse(root.left,low,high);
         if(root.val<=high && root.val>=low)
         s=s+root.val;
