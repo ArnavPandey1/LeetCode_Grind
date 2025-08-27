@@ -14,51 +14,17 @@
  * }
  */
 class Solution {
-    public TreeNode mergeTrees(TreeNode r1, TreeNode r2) {
-        if (r1 == null && r2 == null) {
-            return null;
-        } else if (r1 == null && r2 != null) {
-            return r2;
-        } else if (r2 == null && r1 != null) {
-            return r1;
-        } else {
-            return createTree(r1, r2);
+    public TreeNode mergeTrees(TreeNode root1, TreeNode root2) {
+        if (root1 == null) {
+            return root2;
         }
-    }
+        if (root2 == null) {
+            return root1;
+        }
 
-    public TreeNode createTree(TreeNode r1,TreeNode r2){
-        if(r1==null && r2==null)
-        return null;
-        int a=0;int b=0;
-        if(r1==null && r2!=null){
-            b=r2.val;
-        }
-        else if(r1!=null && r2==null){
-            a=r1.val;
-        }
-        else{
-            a=r1.val;
-            b=r2.val;
-        }
-        TreeNode temp=new TreeNode(a+b);
-        if(r1==null && r2!=null){
-            temp.left=createTree(r1,r2.left);
-        }
-        else if(r1!=null && r2==null){
-            temp.left=createTree(r1.left,r2);
-        }
-        else{
-            temp.left=createTree(r1.left,r2.left);
-        }
-        if(r1==null && r2!=null){
-            temp.right=createTree(r1,r2.right);
-        }
-        else if(r1!=null && r2==null){
-            temp.right=createTree(r1.right,r2);
-        }
-        else{
-            temp.right=createTree(r1.right,r2.right);
-        }
-        return temp;
+        TreeNode root = new TreeNode(root1.val + root2.val);
+        root.left = mergeTrees(root1.left, root2.left);
+        root.right = mergeTrees(root1.right, root2.right);
+        return root;
     }
 }
