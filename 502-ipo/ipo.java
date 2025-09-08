@@ -12,7 +12,7 @@ class Solution {
                 pq.add(arr[i][0]);
                 i++;
              }
-             if(pq.isEmpty()) break;
+             if(!pq.isEmpty())
              w=w+pq.remove();
         }
         return w;
