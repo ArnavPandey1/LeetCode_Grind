@@ -15,20 +15,24 @@
  */
 class Solution {
     public TreeNode buildTree(int[] pre, int[] in) {
-        HashMap<Integer,Integer>map=new HashMap<>();
-        for(int i=0;i<in.length;i++){
-            map.put(in[i],i);
-        }
-        return traverse(pre,in,0,0,in.length-1,map);
+        return traverse(pre,0,pre.length-1,in,0,in.length-1);
     }
-    public static TreeNode traverse(int []pre,int []in, int idx, int start, int end,  HashMap<Integer,Integer>map){
-        if(start>end){
+    public TreeNode traverse(int[] pre ,int plo,int phi,int []in,int inlo,int inhi){
+        if(plo>phi || inlo>inhi){
             return null;
         }
-        TreeNode t=new TreeNode(pre[idx]);
-        int pos=map.get(pre[idx]);
-        t.left=traverse(pre,in,idx+1,start,pos-1,map);
-        t.right=traverse(pre,in,idx+(pos-start)+1,pos+1,end,map);
+        TreeNode t=new TreeNode(pre[plo]);
+        int pos=search(in,inlo,inhi,pre[plo]);
+        int le=pos-inlo;
+        t.left=traverse(pre,plo+1,plo+le,in,inlo,pos-1);
+        t.right=traverse(pre,plo+le+1,phi,in,pos+1,inhi);
         return t;
+    }
+    public int search(int[]in,int inlo,int inhi,int val){
+        for(int i=inlo;i<=inhi;i++){
+            if(in[i]==val)
+            return i;
+        }
+        return -1;
     }
 }
