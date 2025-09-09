@@ -32,8 +32,8 @@ class Solution {
                q.add(t.right);
                n--;
             }
-            if(q.isEmpty())
-            return s;
+            // if(q.isEmpty())
+            // return s;
         }
         return s;
     }
