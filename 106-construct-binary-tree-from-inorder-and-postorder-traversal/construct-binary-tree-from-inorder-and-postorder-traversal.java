@@ -15,21 +15,25 @@
  */
 class Solution {
     public TreeNode buildTree(int[] in, int[] post) {
-        HashMap<Integer,Integer>map=new HashMap<>();
-        for(int i=0;i<in.length;i++){
-            map.put(in[i],i);
-        }
-        return traverse(in, in.length - 1, 0, post, post.length - 1, 0,map);
+        return traverse(in,0,in.length-1,post,0,post.length-1);
     }
-
-    public TreeNode traverse(int[] in, int inhi, int inlo, int[] post, int phi, int plo, HashMap<Integer,Integer>map) {
-        if (inlo > inhi || plo > phi) {
+    public TreeNode traverse(int []in,int inlo,int inhi,int []post,int plo,int phi){
+        if(inlo>inhi || plo>phi){
             return null;
         }
-        TreeNode t = new TreeNode(post[phi]);
-        int pos =map.get(t.val);
-        t.left = traverse(in, pos - 1, inlo, post, phi-(inhi-pos)-1, plo,map);
-        t.right = traverse(in, inhi, pos + 1, post, phi - 1, plo + (pos - inlo),map);
+        TreeNode t=new TreeNode(post[phi]);
+        int pos=search(in,inlo,inhi,post[phi]);
+        int le=pos-inlo;
+        t.left=traverse(in,inlo,pos-1,post,plo,plo+le-1);
+        t.right=traverse(in,pos+1,inhi,post,plo+le,phi-1);
         return t;
+    }
+    public int search(int []in,int inlo,int inhi,int val){
+        for(int i=inlo;i<=inhi;i++){
+            if(in[i]==val){
+                return i;
+            }
+        }
+        return -1;
     }
 }
