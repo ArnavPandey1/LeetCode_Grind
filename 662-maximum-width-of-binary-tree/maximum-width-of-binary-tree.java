@@ -14,37 +14,39 @@
  * }
  */
 class Solution {
-    class Pair {
+    class Pair{
         TreeNode node;
         int idx;
-        Pair(TreeNode node, int idx) {
+        Pair(TreeNode node,int idx){
             this.node=node;
-            this.idx = idx;
+            this.idx=idx;
         }
     }
-
     public int widthOfBinaryTree(TreeNode root) {
-        if(root==null)
-        return 0;
-        Queue<Pair> q = new LinkedList<>();
-        int max=0;
-        q.add(new Pair(root, 0));
-        while (!q.isEmpty()) {
-            Pair pStart = q.peek();
-            Pair pEnd=q.peek();
-            int n = q.size();
-            while (n > 0) {
-                pEnd = q.remove();
-                if (pEnd.node.left != null) {
-                    q.add(new Pair(pEnd.node.left, 2 * pEnd.idx + 1));
+       Queue<Pair>q=new LinkedList<>();
+       q.add(new Pair(root,0));int max=1;
+       while(!q.isEmpty()){
+             int flag=0;
+             int n=q.size();int a=0;int b=0;
+             while(n>0){
+                Pair p=q.remove();
+                if(flag==0)
+                {
+                    flag=1;
+                    a=p.idx;
                 }
-                if (pEnd.node.right != null) {
-                    q.add(new Pair(pEnd.node.right, 2 * pEnd.idx + 2));
-                }
+                if(p.node.left!=null)
+                q.add(new Pair(p.node.left,2*p.idx+1));
+                if(p.node.right!=null)
+                q.add(new Pair(p.node.right,2*p.idx+2));
                 n--;
-            }
-            max=Math.max(max,pEnd.idx-pStart.idx+1);
-        }
-        return max;
+                if(n==0)
+                {
+                  b=p.idx;
+                }
+             }
+             max=Math.max(max,(b-a)+1);
+       } 
+       return max;
     }
 }
