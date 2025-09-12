@@ -14,44 +14,51 @@
  * }
  */
 class Solution {
-    int timer = 0;
-    TreeNode tar = null;
-
+    static int time=0;
     public int amountOfTime(TreeNode root, int start) {
-        timer = 0;
-        if (root == null) {
-            return timer;
-        }
-        traverse(root, start);
-        int ht = height(tar);
-        return Math.max(ht - 1, timer);
+        time=0;
+        calcTime(root,start);
+        TreeNode nn=findNode(root,start);
+        return Math.max(time,height(nn)-1);        
     }
-
-    public int traverse(TreeNode rt, int target) {
-        if (rt == null)
+    public static TreeNode findNode(TreeNode root,int target){
+        if(root==null){
+            return null;
+        }
+        if(target==root.val){
+            return root;
+        }
+        TreeNode left=findNode(root.left,target);
+        if(left!=null){
+            return left;
+        }
+        return findNode(root.right,target);
+    }
+    public static int height(TreeNode root){
+        if(root==null){
             return 0;
-        if (rt.val == target) {
-            tar = rt;
+        }
+        int left=height(root.left);
+        int right=height(root.right);
+        return Math.max(left,right)+1;
+    }
+    public static int calcTime(TreeNode root,int target){
+        if(root==null){
+            return 0;
+        }
+        if(root.val==target){
             return -1;
         }
-        int l = traverse(rt.left, target);
-        int r = traverse(rt.right, target);
-        if (l < 0) {
-            timer = Math.max(timer, -1 * l + r);
-            return l - 1;
+        int left=calcTime(root.left,target);
+        int right=calcTime(root.right,target);
+        if(left<0){
+            time=Math.max(time,Math.abs(left)+right);
+            return left-1;
         }
-        if (r < 0) {
-            timer = Math.max(timer, -1 * r + l);
-            return r - 1;
+        if(right<0){
+            time=Math.max(time,Math.abs(right)+left);
+            return right-1;
         }
-        return 1 + Math.max(l, r);
-    }
-
-    public int height(TreeNode rt) {
-        if (rt == null)
-            return 0;
-        int l = height(rt.left);
-        int r = height(rt.right);
-        return 1 + Math.max(l, r);
+        return Math.max(left,right)+1;
     }
 }
