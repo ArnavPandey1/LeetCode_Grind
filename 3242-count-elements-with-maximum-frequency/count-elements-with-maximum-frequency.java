@@ -16,9 +16,8 @@ class Solution {
         }
         for(int i:map.values()){
             if(i==max)
-            c=c+max;
+            c++;
         }
-
-        return c;
+        return c*max;
     }
 }
