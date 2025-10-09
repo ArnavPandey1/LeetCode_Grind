@@ -1,7 +1,7 @@
 class Solution {
     public long minimumTime(int[] time, int totalTrips) {
         Arrays.sort(time);
-        long lb=time[0];
+        long lb=1;
         long ub=(long)time[time.length-1]*totalTrips;
         long ans=-1;
         while(lb<=ub){
