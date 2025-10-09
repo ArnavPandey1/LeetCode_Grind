@@ -7,10 +7,11 @@ class Solution {
             for(int j=0;j<str.length();j++){
                 arr[str.charAt(j)-'a']++;
             }
-            if(!map.containsKey(Arrays.toString(arr))){
-                map.put(Arrays.toString(arr),new ArrayList<>());
+            String s=Arrays.toString(arr);
+            if(!map.containsKey(s)){
+                map.put(s,new ArrayList<>());
             }
-            map.get(Arrays.toString(arr)).add(str);
+            map.get(s).add(str);
         }
         return new ArrayList<>(map.values());
     }
