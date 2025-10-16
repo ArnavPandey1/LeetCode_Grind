@@ -27,8 +27,8 @@ class Solution {
         temp.add(root);
         if(root==val){
             l.addAll(new ArrayList<>(temp));
-            temp.remove(temp.size()-1);
-            return;
+            // temp.remove(temp.size()-1);
+            // return;
         }
         traverse(root.left,l,val);
         traverse(root.right,l,val);
