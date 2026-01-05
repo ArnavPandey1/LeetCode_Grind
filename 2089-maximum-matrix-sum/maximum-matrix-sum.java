@@ -10,9 +10,6 @@ class Solution {
                 sum=sum+Math.abs(matrix[i][j]);
             }
         }
-        if(count_neg%2!=0){
-           sum=sum-2*smallest;
-        }
-        return sum;
+        return count_neg%2!=0?sum=sum-2*smallest:sum;
     }
 }
