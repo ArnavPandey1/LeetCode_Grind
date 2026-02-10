@@ -19,7 +19,7 @@ class Solution {
     public int maxProduct(TreeNode root) {
         max=Long.MIN_VALUE;
         total=helper(root);
-        helper1(root,total);
+        helper1(root);
         return (int)(max%1000000007);
     }
     public long helper(TreeNode root){
@@ -28,15 +28,15 @@ class Solution {
        }
        long s1=helper(root.left);
        long s2=helper(root.right);
-       return (root.val+s1+s2)%1000000007;
+       return (root.val+s1+s2);
     }
-    public long helper1(TreeNode root,long total){
+    public long helper1(TreeNode root){
         if(root==null){
             return 0;
         }
-        long s1=helper1(root.left,total);
-        long s2=helper1(root.right,total);
-        long s=(root.val+s1+s2)%1000000007;
+        long s1=helper1(root.left);
+        long s2=helper1(root.right);
+        long s=(root.val+s1+s2);
         max=Math.max(max,(total-s)*s);
         return s;
     }
