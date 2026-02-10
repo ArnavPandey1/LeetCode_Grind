@@ -14,27 +14,30 @@
  * }
  */
 class Solution {
-    long max = 0;
-    long ts=0;
+    long max=Long.MIN_VALUE;
+    long total=0;
     public int maxProduct(TreeNode root) {
-        ts = helper(root);
-        helper2(root);
+        max=Long.MIN_VALUE;
+        total=helper(root);
+        helper1(root,total);
         return (int)(max%1000000007);
     }
-
-    public long helper(TreeNode root) {
-        if (root == null) {
-            return 0;
-        }
-        return root.val + helper(root.left) + helper(root.right);
+    public long helper(TreeNode root){
+       if(root==null){
+         return 0;
+       }
+       long s1=helper(root.left);
+       long s2=helper(root.right);
+       return (root.val+s1+s2)%1000000007;
     }
-    public long helper2(TreeNode root) {
-        if (root == null) {
+    public long helper1(TreeNode root,long total){
+        if(root==null){
             return 0;
         }
-        long ls=helper2(root.left);
-        long rs=helper2(root.right);
-        max=Math.max(max,(ls+rs+root.val)*(ts-(ls+rs+root.val)));
-        return (ls+rs+root.val);
+        long s1=helper1(root.left,total);
+        long s2=helper1(root.right,total);
+        long s=(root.val+s1+s2)%1000000007;
+        max=Math.max(max,(total-s)*s);
+        return s;
     }
 }
