@@ -25,9 +25,9 @@ class Solution {
         if (root == null) {
             return;
         }
-        char ch = (char) ('a' + root.val);
+        char ch = (char) (97 + root.val);
         if (root.left == null && root.right == null) {
-            ans=ch+ans;
+            ans = ch + ans;
             if (ans.compareTo(min) < 0) {
                 min = "";
                 min = min + ans;
