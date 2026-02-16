@@ -1,8 +1,8 @@
 class Solution {
     public boolean isValidSerialization(String s) {
         String str[]=s.split(",");
-        if(str.length>1 && str[0].equals("#"))
-        return false;
+       /* if(str.length>1 && str[0].equals("#"))
+        return false;*/
         int v = 1;
         for(int i=0;i<str.length;i++){
             if(str[i].equals("#")){
