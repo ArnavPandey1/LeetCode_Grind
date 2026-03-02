@@ -8,12 +8,7 @@ class Solution {
             int x=pq.poll();
             int y=pq.poll();
             if(x!=y){
-                if(x<y){
-                  pq.add(y-x);
-                }
-                else{
-                  pq.add(x-y);
-                }
+                boolean a=x<y?pq.add(y-x):pq.add(x-y);
             }
         }
         return pq.isEmpty()?0:pq.poll();
