@@ -15,6 +15,8 @@ class Solution {
         for(int k=0;k<n;k++){
             if(mat[i][k]==1)
             t++;
+            if(t>1)
+            break;
         }
         return t;
     }
@@ -23,6 +25,8 @@ class Solution {
         for(int k=0;k<n;k++){
             if(mat[k][i]==1)
             t++;
+            if(t>1)
+            break;
         }
         return t;
     }
