@@ -1,12 +1,15 @@
 class Solution {
     public int countRotations(String s, int k) {
+        StringBuilder sb=new StringBuilder(s);
         int count=0;
         int i=0;
-        while(i<s.length()){
-              if(score(s)==k){
+        while(i<sb.length()){
+              if(score(sb.toString())==k){
                 count++;
               }
-              s=s.substring(1)+s.charAt(0);
+              char ch=sb.charAt(0);
+              sb.deleteCharAt(0);
+              sb.append(ch);
               i++;
         }
         return count;
