@@ -18,7 +18,7 @@ class Solution {
                 continue;
             }
             int a=Math.abs((l1.get(i)-mid))/x;
-            if(a==0)return -1;
+            if(Math.abs((l1.get(i)-mid))%x!=0)return -1;
             s+=a;
         }
         return s;
