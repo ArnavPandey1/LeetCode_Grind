@@ -1,6 +1,6 @@
 class Solution {
     public long maxPairStrength(int[] nums) {
-        long ans=Long.MIN_VALUE;
+        Arrays.sort(nums);long ans=Long.MIN_VALUE;
         for (int i = 0; i < nums.length; i++) {
             for (int j =i+1; j < nums.length; j++) {
                 long a = nums[i];
