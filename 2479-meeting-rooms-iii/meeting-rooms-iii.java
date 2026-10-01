@@ -1,64 +1,56 @@
 class Solution {
-    class Pair {
-        int end;
-        int idx;
-
-        Pair(int end, int idx) {
-            this.end = end;
-            this.idx = idx;
+    class Pair{
+        long endTime;
+        long roomNo;
+        Pair(long endTime,long roomNo){
+            this.endTime=endTime;
+            this.roomNo=roomNo;
         }
     }
-
-    public int mostBooked(int n, int[][] arr) {
-        TreeMap<Integer, Integer> map = new TreeMap<>();
-        for (int i = 0; i < n; i++)
-            map.put(i, 0);
-
-        Arrays.sort(arr, (a, b) -> a[0] - b[0]);
-
-        PriorityQueue<Pair> pq = new PriorityQueue<>((a, b) -> {
-            if (a.end == b.end) {
-                return a.idx - b.idx;
-            } else {
-                return a.end - b.end;
-            }
+    public int mostBooked(int n, int[][] meetings) {
+        long meetingCount[]=new long[n];
+        Arrays.sort(meetings,(a,b)->Integer.compare(a[0],b[0]));
+        PriorityQueue<Long>availableRoom=new PriorityQueue<>();
+        PriorityQueue<Pair>usedRoom=new PriorityQueue<>((a,b)->{
+             if(a.endTime!=b.endTime){
+                return Long.compare(a.endTime,b.endTime);
+             }
+             return Long.compare(a.roomNo,b.roomNo);
         });
-
-        PriorityQueue<Integer> q = new PriorityQueue<>();
-        for (int i = 0; i < n; i++) {
-            q.add(i);
-        }
-
-        for (int i = 0; i < arr.length; i++) {
-            int start = arr[i][0], end = arr[i][1];
-            int duration = end - start;
-
-            // ✅ FIX: free all rooms that have ended before current meeting
-            while (!pq.isEmpty() && pq.peek().end <= start) {
-                q.add(pq.poll().idx);
-            }
-
-            if (!q.isEmpty()) {
-                int room = q.poll();
-                pq.add(new Pair(end, room));
-                map.put(room, map.get(room) + 1);
-            } else {
-                Pair p = pq.poll(); // earliest finishing room
-                int newEnd = p.end + duration;
-                pq.add(new Pair(newEnd, p.idx));
-                map.put(p.idx, map.get(p.idx) + 1);
-            }
+         for(int i=0;i<n;i++){
+             availableRoom.add((long)i);
+         }  
+        for(int i=0;i<meetings.length;i++){
+            long st=meetings[i][0];
+            long end=meetings[i][1];
+            long duration=end-st;
             
-        }
-
-        // ✅ simplified: find room with max usage
-        int ans = 0, maxUse = 0;
-        for (int i : map.keySet()) {
-            if (map.get(i) > maxUse) {
-                maxUse = map.get(i);
-                ans = i;
+            //make available room;
+            while(!usedRoom.isEmpty()&&st>=usedRoom.peek().endTime){
+                 long room=usedRoom.peek().roomNo;
+                 usedRoom.poll();
+                 availableRoom.add(room);
             }
+            if(!availableRoom.isEmpty()){
+               long r=availableRoom.poll();
+               usedRoom.add(new Pair(end,r));
+               meetingCount[(int)r]++;
+            }else{
+               long r=usedRoom.peek().roomNo;
+               long e=usedRoom.peek().endTime;
+               usedRoom.poll();
+               usedRoom.add(new Pair(e+duration,r));
+               meetingCount[(int)r]++;
+            }
+
         }
-        return ans;
+         long count=0;int result=0;
+         for(int i=0;i<meetingCount.length;i++){
+            if(meetingCount[i]>count){
+                count=meetingCount[i];
+                result=i;
+            }
+         }
+         return result;
     }
 }
